@@ -1,0 +1,141 @@
+﻿@using System.Data
+@model DataTable
+
+<script src="~/js/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Title Section -->
+<h1 class="text-black text-center bg-danger-subtle">Quiz Wise Question List</h1>
+
+<!-- Breadcrumb Navigation -->
+<nav aria-label="breadcrumb" class="p-3">
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionList">Quiz Wise Questions</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Quiz Wise Questions List</li>
+    </ol>
+</nav>
+
+@* @if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: '@TempData["ErrorMessage"]',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+} *@
+
+@if (TempData["Message"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: '@TempData["Message"]',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+}
+
+@if (TempData["DeleteMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Deleted!',
+            text: '@TempData["DeleteMessage"]',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+}
+
+@* <partial name="_SearchForm"/> *@
+
+<!-- Create New Quiz Wise Question Button -->
+<p class="text-end">
+    <a asp-action="AddEditQuizWiseQuestion" class="btn btn-outline-light">
+        <i class="bi bi-plus-circle"></i> Create New Quiz Wise Question
+    </a>
+    <a asp-controller="QuizWiseQuestion" asp-action="ExportToExcel" class="btn btn-outline-success">
+        <i class="fa-solid fa-file-export"></i>Export To Excel
+    </a>
+</p>
+
+
+<!-- Responsive Table Wrapper -->
+<div class="table">
+    <table class="table table-hover table-bordered align-middle table-dark" style="font-size: 14px;">
+        <thead class="table-light">
+            <tr>
+                <th>QuizWiseQuestionsID</th>
+                <th>Quiz</th>
+                <th>Question</th>
+                <th>User</th>
+                <th>Created</th>
+                <th>Modified</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Rows)
+            {
+                <tr>
+                    <td>@row["QuizWiseQuestionsID"]</td>
+                    <td>@row["QuizName"]</td>
+                    <td>@row["QuestionText"]</td>
+                    <td>@row["UserName"]</td>
+                    <td>@row["Created"]</td>
+                    <td>@row["Modified"]</td>
+                    <td class="text-center">
+                        <!-- Action dropdown menu -->
+                        <div class="dropdown">
+                            <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots"></i>
+                            </button>
+                            <ul class="dropdown-menu bg-black" aria-labelledby="dropdownMenuButton">
+                                <li>
+                                    <a asp-controller="QuizWiseQuestion" asp-action="AddEditQuizWiseQuestion" asp-route-QuizWiseQuestionID="@row["QuizWiseQuestionsID"]" class="dropdown-item text-warning">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-controller="QuizWiseQuestion" asp-action="DetailsQuizWiseQuestion" asp-route-QuizWiseQuestionID="@row["QuizWiseQuestionsID"]" class="dropdown-item text-info">
+                                        <i class="bi bi-eye"></i> Details
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="deleteQuizWiseQuestion('@row["QuizWiseQuestionsID"]')" class="dropdown-item text-danger">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function deleteQuizWiseQuestion(QuizWiseQuestionsID) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var deleteUrl = '@Url.Action("DeleteQuizWiseQuestion", "QuizWiseQuestion", new { QuizWiseQuestionsID = "__qid__" })';
+                deleteUrl = deleteUrl.replace("__qid__", QuizWiseQuestionsID);
+                window.location.href = deleteUrl;
+            }
+        });
+    }
+</script>

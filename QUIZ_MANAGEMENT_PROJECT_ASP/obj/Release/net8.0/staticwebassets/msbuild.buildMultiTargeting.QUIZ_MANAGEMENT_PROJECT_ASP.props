@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\QUIZ_MANAGEMENT_PROJECT_ASP.props" />
+</Project>

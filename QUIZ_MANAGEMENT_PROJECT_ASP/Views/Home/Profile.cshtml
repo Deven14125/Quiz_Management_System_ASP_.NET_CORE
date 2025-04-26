@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+    var user = User.Identity.Name; // Assuming the user details are stored in the authentication cookie or session
+}
+
+<h1>My Profile</h1>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <h3 class="text-center">Profile Information</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group mb-3">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" class="form-control" value="@user"/>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="fullName">Full Name:</label>
+                            <input type="text" id="fullName" class="form-control" value="@(User.Claims.FirstOrDefault(c => c.Type == "FullName")?.Value)"/>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" class="form-control" value="@(User.Claims.FirstOrDefault(c => c.Type == "Email")?.Value)"/>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="mobile">Mobile:</label>
+                            <input type="text" id="mobile" class="form-control" value="@(User.Claims.FirstOrDefault(c => c.Type == "Mobile")?.Value)"/>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="role">Role:</label>
+                            <input type="text" id="role" class="form-control" value="@(User.Claims.FirstOrDefault(c => c.Type == "Role")?.Value)"/>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="lastLogin">Last Login:</label>
+                            <input type="text" id="lastLogin" class="form-control" value="@(User.Claims.FirstOrDefault(c => c.Type == "LastLogin")?.Value)"/>
+                        </div>
+
+                        <div class="form-group">
+                            <a href="/Account/UpdateProfile" class="btn btn-primary">Edit Profile</a>
+                            <a asp-controller="User" asp-action="Logout" class="btn btn-danger">Logout</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

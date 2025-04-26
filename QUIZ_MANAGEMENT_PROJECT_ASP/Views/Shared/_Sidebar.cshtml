@@ -1,0 +1,146 @@
+﻿<aside id="sidebar" class="sidebar bg-black">
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link collapsed bg-black text-light" asp-controller="Home" asp-action="Index">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed bg-black text-light" data-bs-target="#student-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="student-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                @*  <li>
+                        <a class="nav-link bg-black text-light" asp-controller="User" asp-action="RegisterUser">
+                            <i class="bi bi-circle bg-black text-light"></i><span>User Add/Edit</span>
+                        </a>
+                    </li> *@
+                <li>
+                    <a class="nav-link bg-black text-light" asp-controller="User" asp-action="UserList">
+                        <i class="bi bi-circle bg-black text-light"></i><span>User List</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed bg-black text-light" data-bs-target="#quiz-nav" data-bs-toggle="collapse">
+                <i class="bi bi-menu-button-wide"></i><span>Quiz</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="quiz-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a class="nav-link bg-black text-light" asp-controller="Quiz" asp-action="QuizAddEdit">
+                        <i class="bi bi-circle bg-black text-light"></i><span>Quiz Add/Edit</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link bg-black text-light" asp-controller="Quiz" asp-action="QuizList">
+                        <i class="bi bi-circle bg-black text-light"></i><span>Quiz List</span>
+                    </a>
+                </li>
+                @* <li>
+                        <a class="nav-link bg-black text-light" asp-controller="Quiz" asp-action="QuizEdit">
+                            <i class="bi bi-circle bg-black text-light"></i><span>Quiz Edit</span>
+                        </a>
+                    </li> *@
+            </ul>
+        </li><!-- End Quiz Nav -->
+
+        @*  <li>
+                <a class="nav-link collapsed bg-black text-light" asp-controller="Quiz" asp-action="QuizList">
+                    <i class="bi bi-menu-button-wide"></i><span>Quiz List</span>
+                </a>
+            </li> *@
+
+        <li class="nav-item">
+            <a class="nav-link collapsed bg-black text-light" data-bs-target="#question-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Question</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="question-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a class="nav-link bg-black text-light" asp-controller="Question" asp-action="QuestionAddEdit">
+                        <i class="bi bi-circle bg-black text-light"></i><span>Question Add/Edit</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link bg-black text-light" asp-controller="Question" asp-action="QuestionList">
+                        <i class="bi bi-circle bg-black text-light"></i><span>Question List</span>
+                    </a>
+                </li>
+                @* <li>
+                        <a class="nav-link bg-black text-light" asp-controller="Question" asp-action="QuestionEdit">
+                            <i class="bi bi-circle bg-black text-light"></i><span>Question Edit</span>
+                        </a>
+                    </li> *@
+            </ul>
+        </li><!-- End Question Nav -->
+        @* <li>
+                <a class="nav-link collapsed bg-black text-light" asp-controller="Question" asp-action="QuestionList">
+                    <i class="bi bi-menu-button-wide"></i><span>Question List</span>
+                </a>
+            </li> *@
+
+        <li class="nav-item">
+            <a class="nav-link collapsed bg-black text-light" data-bs-target="#questionlevel-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Question Level</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="questionlevel-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a class="nav-link bg-black text-light" asp-controller="QuestionLevel" asp-action="AddEditQuestionLevel">
+                        <i class="bi bi-circle bg-black text-light"></i><span>Add/Edit QuestionLevel</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link bg-black text-light" asp-controller="QuestionLevel" asp-action="ViewQuestionLevelList">
+                        <i class="bi bi-circle bg-black text-light"></i><span>QuestionLevel List</span>
+                    </a>
+                </li>
+                @* <li>
+                        <a class="nav-link bg-black text-light" asp-controller="QuestionLevel" asp-action="EditQuestionLevel">
+                            <i class="bi bi-circle bg-black text-light"></i><span>Edit QuestionLevel</span>
+                        </a>
+                    </li> *@
+            </ul>
+        </li>
+
+        @* <li>
+                <a class="nav-link collapsed bg-black text-light" asp-controller="QuestionLevel" asp-action="ViewQuestionLevelList">
+                    <i class="bi bi-menu-button-wide"></i><span>Question Level</span>
+                </a>
+            </li> *@
+
+        <li class="nav-item">
+            <a class="nav-link collapsed bg-black text-light" data-bs-target="#quizwisequestion-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Quiz wise Question</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="quizwisequestion-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a class="nav-link bg-black text-light" asp-controller="QuizWiseQuestion" asp-action="AddEditQuizWiseQuestion">
+                        <i class="bi bi-circle bg-black text-light"></i><span>Add/Edit Quiz wise Question</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link bg-black text-light" asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionList">
+                        <i class="bi bi-circle bg-black text-light"></i><span>Quiz wise Questions List</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        @* <li>
+                <a class="nav-link collapsed bg-black text-light" asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionList">
+                    <i class="bi bi-menu-button-wide"></i><span>Quiz wise Questions</span>
+                </a>
+           </li> *@
+
+        <li>
+            <a class="nav-link bg-black text-light" asp-controller="QuizQuestion" asp-action="GetQuizData">
+                <i class="bi bi-circle bg-black text-light"></i><span>Quiz Question List</span>
+            </a>
+        </li>
+    </ul>
+
+</aside>

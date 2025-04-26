@@ -1,0 +1,178 @@
+﻿@model QUIZ_MANAGEMENT_PROJECT_ASP.Models.QuestionModel
+
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Question" asp-action="QuestionList">Questions</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@((Model.QuestionID == 0) ? "Add New Question" : "Edit Question")</li>
+    </ol>
+</nav>
+
+<h1 class="text-light">@TempData["PageTitle"]</h1>
+
+<div class="container mt-4">
+    <div class="col-md-12">
+        <div class="card shadow-lg p-4 bg-info-subtle">
+
+            <h4 class="card-title text-center text-black">Questions Details</h4>
+
+            <hr />
+
+            <form asp-controller="Question" asp-action="SaveQuestion" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Question ID (Hidden) -->
+                @if (Model.QuestionID != 0)
+                {
+                    <!-- In edit mode, show the QuestionID as a read-only field -->
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="QuestionID" class="control-label">Question ID</label>
+                            <input asp-for="QuestionID" class="form-control" readonly />
+                            <span asp-validation-for="QuestionID" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <!-- In add mode, include the QuestionID as a hidden field -->
+                    <input type="hidden" asp-for="QuestionID" />
+                }
+
+                <!-- Question Text -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="QuestionText" class="control-label">
+                            Question Text <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="QuestionText" class="form-control" placeholder="Enter Question" />
+                        <span asp-validation-for="QuestionText" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Question Level DropDown -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="QuestionLevelID" class="control-label">
+                            Level <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-control" asp-for="QuestionLevelID" asp-items="@(new SelectList(ViewBag.QuestionLevelList, "QuestionLevelID", "QuestionLevel"))">
+                            <option value="">Select Level</option>
+                        </select>
+                        <span asp-validation-for="QuestionLevelID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Options A, B, C, D -->
+                <div class="row text-black">
+                    <div class="col-md-3">
+                        <div class="form-group mb-3">
+                            <label asp-for="OptionA" class="control-label">
+                                Option A <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="OptionA" class="form-control" placeholder="Option A" />
+                            <span asp-validation-for="OptionA" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-3">
+                            <label asp-for="OptionB" class="control-label">
+                                Option B <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="OptionB" class="form-control" placeholder="Option B" />
+                            <span asp-validation-for="OptionB" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-3">
+                            <label asp-for="OptionC" class="control-label">
+                                Option C <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="OptionC" class="form-control" placeholder="Option C" />
+                            <span asp-validation-for="OptionC" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-3">
+                            <label asp-for="OptionD" class="control-label">
+                                Option D <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="OptionD" class="form-control" placeholder="Option D" />
+                            <span asp-validation-for="OptionD" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Correct Option DropDown -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="CorrectOption" class="control-label">
+                            Correct Option <span class="text-danger">*</span>
+                        </label>
+                        <select asp-for="CorrectOption" class="form-control">
+                            <option value="">Select Correct Option</option>
+                            <option value="A">Option A</option>
+                            <option value="B">Option B</option>
+                            <option value="C">Option C</option>
+                            <option value="D">Option D</option>
+                        </select>
+                        <span asp-validation-for="CorrectOption" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Question Marks -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="QuestionMarks" class="control-label">
+                            Question Marks <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="QuestionMarks" class="form-control" placeholder="Enter Marks for Question" />
+                        <span asp-validation-for="QuestionMarks" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- User DropDown -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="UserID" class="control-label">
+                            User <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                            <option value="">Select User</option>
+                        </select>
+                        <span asp-validation-for="UserID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- IsActive checkbox only for edit mode -->
+                @if (Model.QuestionID > 0)
+                {
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="IsActive" class="control-label"></label>
+                            <input asp-for="IsActive" type="checkbox" class="form-check-input" />
+                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+
+                <!-- Submit Button -->
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-controller="Question" asp-action="QuestionList" class="btn btn-black bg-black text-light w-100">Back to List</a>
+                    </div>
+                    <div class="col-6">
+                        <input type="submit" value="@(Model.QuestionID == 0 ? "Create Question" : "Update Question")" class="btn btn-success btn-block w-100" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

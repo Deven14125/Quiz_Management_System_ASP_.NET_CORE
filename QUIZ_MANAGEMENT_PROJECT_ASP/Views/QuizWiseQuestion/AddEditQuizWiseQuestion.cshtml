@@ -1,0 +1,109 @@
+﻿@model QUIZ_MANAGEMENT_PROJECT_ASP.Models.QuizWiseQuestionsModel
+
+@{
+    var isEditMode = ViewBag.IsEditMode ?? false;
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionList">Quiz</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add/Edit Quiz Question</li>
+    </ol>
+</nav>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: '@TempData["ErrorMessage"]',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+}
+
+
+<h1 class="text-light">@TempData["PageTitle"]</h1>
+
+<div class="container mt-4">
+    <div class="col-md-12">
+        <div class="card shadow-lg p-4 bg-info-subtle">
+            <h4 class="card-title text-center mb-4 text-black">Quiz Wise Question Details</h4>
+            <hr />
+
+            <form asp-action="SaveQuizWiseQuestion" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- QuizWiseQuestions ID -->
+                @if (Model.QuizWiseQuestionsID != 0)
+                {
+                    <div class="col-12 text-black">
+                        <div class="form-group mb-3">
+                            <label asp-for="QuizWiseQuestionsID" class="control-label"></label>
+                            <input asp-for="QuizWiseQuestionsID" class="form-control" readonly placeholder="Enter the QuizWiseQuestions ID" />
+                            <span asp-validation-for="QuizWiseQuestionsID" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <input type="hidden" asp-for="QuizWiseQuestionsID" />
+                }
+
+                <!-- User DropDown -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="UserID">User <span class="text-danger">*</span></label>
+                        <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                            <option value="">Select User</option>
+                        </select>
+                        <span asp-validation-for="UserID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Quiz DropDown -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="QuizID">Quiz <span class="text-danger">*</span></label>
+                        <select class="form-control" asp-for="QuizID" asp-items="@(new SelectList(ViewBag.QuizList, "QuizID", "QuizName"))">
+                            <option value="">Select Quiz</option>
+                        </select>
+                        <span asp-validation-for="QuizID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Question DropDown -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="QuestionID">Question <span class="text-danger">*</span></label>
+                        <select class="form-control" asp-for="QuestionID" asp-items="@(new SelectList(ViewBag.QuestionList, "QuestionID", "QuestionText"))">
+                            <option value="">Select Question</option>
+                        </select>
+                        <span asp-validation-for="QuestionID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionList" class="btn btn-black bg-black text-light w-100">Back to List</a>
+                    </div>
+                    <div class="col-6">
+                        <input type="submit" value="@((ViewBag.IsEditMode != null && ViewBag.IsEditMode == true) ? "Update QuizQuestion" : "Add QuizQuestion")" class="btn btn-success btn-block w-100" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

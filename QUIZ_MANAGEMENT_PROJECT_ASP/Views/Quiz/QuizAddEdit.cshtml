@@ -1,0 +1,106 @@
+﻿@model QUIZ_MANAGEMENT_PROJECT_ASP.Models.QuizModel
+
+<script src="~/css/quizStyles.css"></script>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Quiz" asp-action="QuizList">Quiz</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@((Model.QuizID != 0) ? "Edit Quiz" : "Add New Quiz")</li>
+    </ol>
+</nav>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: '@TempData["ErrorMessage"]',
+            icon: 'error',
+            confirmButtonText: 'Try Again'
+        });
+    </script>
+}
+
+<h1 class="text-black text-center bg-danger-subtle">@TempData["PageTitle"]</h1>
+
+<div class="container mt-4">
+    <div class="col-md-12">
+        <div class="card shadow-lg p-4 bg-info-subtle">
+            <h4 class="card-title text-center mb-4 text-black">Quiz Details</h4>
+            <hr />
+
+            <form asp-controller="Quiz" asp-action="SaveQuiz" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Quiz ID (Hidden) -->
+                @if (Model.QuizID != 0)
+                {
+                    <input asp-for="QuizID" type="hidden" />
+                }
+
+                <!-- Quiz Name (Required) -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="QuizName" class="control-label">
+                            Quiz Name <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="QuizName" class="form-control text-black" placeholder="Enter Quiz Name" />
+                        <span asp-validation-for="QuizName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Total Questions (Required) -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="TotalQuestions" class="control-label">
+                            Total Questions <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="TotalQuestions" class="form-control" placeholder="Enter Total Questions" />
+                        <span asp-validation-for="TotalQuestions" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Quiz Date (Required) -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="QuizDate" class="control-label">
+                            Quiz Date <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="QuizDate" type="datetime-local" class="form-control" />
+                        <span asp-validation-for="QuizDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- User Name (Required) -->
+                <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="UserID">
+                            User <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                            <option value="">Select User</option>
+                        </select>
+                        <span asp-validation-for="UserID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-controller="Quiz" asp-action="QuizList" class="btn btn-black bg-black text-light w-100">Back to List</a>
+                    </div>
+                    <div class="col-6">
+                        <input type="submit" value="@(Model.QuizID != 0 ? "Save Changes" : "Create Quiz")" class="btn btn-success btn-block w-100" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,170 @@
+/* animations.css */
+
+/* Left side animation */
+.fadeInLeft {
+    animation: fadeInLeft 1s ease-out;
+}
+
+/* Right side animation */
+.slideInRight {
+    animation: slideInRight 1s ease-out;
+}
+
+/* Beep effect (light flicker without disappearing completely) */
+.beep {
+    animation: beep 2s ease-in-out infinite; /* Increased the duration to 2s for slower beep */
+}
+
+/* Slide up and down effect */
+.slideUpDown {
+    animation: slideUpDown 1s ease-out infinite alternate;
+}
+
+/* Back and forward effect */
+.backForward {
+    animation: backForward 1s ease-in-out infinite alternate;
+}
+
+/* Keyframes for fading in from left */
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Keyframes for sliding in from right */
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Keyframes for beep effect (light flicker) */
+@keyframes beep {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4; /* Reduced opacity for light flicker effect */
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Keyframes for sliding up and down */
+@keyframes slideUpDown {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Keyframes for back and forward effect */
+@keyframes backForward {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+.logout-btn {
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color : red;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* Container styling */
+.form-container {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Row styling */
+.form-row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* Label styling */
+.form-label {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #374151;
+}
+
+/* Input field styling */
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+}
+
+.input-quizname {
+    background: #fdfd96;
+}
+
+    .input-quizname:focus {
+        box-shadow: 0 0 5px #8bc34a;
+    }
+
+    .input-quizname:blur {
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+.input-2 {
+    background: #b5e7a0;
+}
+
+    .input-2:focus {
+        box-shadow: 0 0 5px #f39c12;
+    }
+
+.input-3 {
+    background: #ffb6c1;
+}
+
+    .input-3:focus {
+        box-shadow: 0 0 5px #3498db;
+    }

@@ -1,0 +1,47 @@
+﻿<div style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2); padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 1200px; margin:10px">
+    <form>
+        <!-- Upper Row: Quiz Name, Min Questions, Max Questions -->
+        <div class="row" style="display: flex; gap: 20px; justify-content: space-between;">
+            <div class="col-3" style="flex-grow: 1;">
+                <label for="QuizName" style="font-weight: bold; font-size: 1.1em; color: #374151;">Quiz Name</label>
+                <input id="QuizName" type="search" placeholder="Enter quiz name"
+                       style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; background: #fdfd96;"
+                       oninput="filterQuizList()" />
+            </div>
+            <div class="col-3" style="flex-grow: 1;">
+                <label for="MinQuestion" style="font-weight: bold; font-size: 1.1em; color: #374151;">Min Questions</label>
+                <input id="MinQuestion" type="number" placeholder="Enter min questions"
+                       style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; background: #ffcccb;"
+                       oninput="filterQuizList()" />
+            </div>
+            <div class="col-3" style="flex-grow: 1;">
+                <label for="MaxQuestion" style="font-weight: bold; font-size: 1.1em; color: #374151;">Max Questions</label>
+                <input id="MaxQuestion" type="number" placeholder="Enter max questions"
+                       style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; background: #b5e7a0;"
+                       oninput="filterQuizList()" />
+            </div>
+        </div>
+
+        <!-- Lower Row: Start Date, End Date -->
+        <div class="row" style="display: flex; gap: 20px; justify-content: space-between; margin-top: 20px;">
+            <div class="col-3" style="flex-grow: 1;">
+                <label for="StartDate" style="font-weight: bold; font-size: 1.1em; color: #374151;">Start Date</label>
+                <input id="StartDate" type="date"
+                       style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; background: #d3e0ff;"
+                       oninput="filterQuizList()" />
+            </div>
+            <div class="col-3" style="flex-grow: 1;">
+                <label for="EndDate" style="font-weight: bold; font-size: 1.1em; color: #374151;">End Date</label>
+                <input id="EndDate" type="date"
+                       style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; background: #e0bbff;"
+                       oninput="filterQuizList()" />
+            </div>
+        </div>
+
+        <!-- Button Row -->
+        <div class="row" style="display: flex; gap: 20px; margin-top: 30px;margin-left:5px">
+            <button type="submit" style="width:150px; padding: 8px 16px; border-radius: 10px; background-color: #3498db; color: white; border: none; font-size: 1em; cursor: pointer; transition: 0.3s;">Search</button>
+            <button type="reset" style="width:150px; padding: 8px 16px; border-radius: 10px; background-color: #e74c3c; color: white; border: none; font-size: 1em; cursor: pointer; transition: 0.3s;">Reset</button>
+        </div>
+    </form>
+</div>

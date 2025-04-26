@@ -1,0 +1,56 @@
+﻿@model List<QUIZ_MANAGEMENT_PROJECT_ASP.Models.QuizQuestionModel>
+
+<!-- Page Title -->
+<h1 class="text-center title-bg text-light py-3">@TempData["Title"]</h1>
+
+<!-- Link to external CSS file -->
+<link rel="stylesheet" href="~/css/quizStyles.css">
+
+<!-- Dropdown Form to Select Quiz -->
+<form asp-controller="QuizQuestion" asp-action="GetQuizData" method="get">
+    <div class="form-group">
+        <label class="form-label text-light" for="QuizName">Select Quiz</label>
+        <div class="quiz-selection">
+            <select id="QuizName" name="QuizID" class="form-control quiz-dropdown">
+                <option value="">-- Select a Quiz --</option>
+                @foreach (var quiz in ViewBag.quizQuestionList)
+                {
+                    <option value="@quiz.QuizID">@quiz.QuizName</option>
+                }
+            </select>
+
+            <button type="submit" class="btn btn-primary-custom">Show</button>
+            <button type="submit" asp-controller="QuizQuestion" asp-action="ClearQuizData" class="btn btn-secondary-custom">Reset</button>
+        </div>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <h3 class="quiz-header mt-4 text-light">Questions</h3>
+    <div class="quiz-container">
+        @{
+            int questionNumber = 1; // Initialize question number to 1
+        }
+        @foreach (var question in Model)
+        {
+            <div class="card quiz-card mb-3">
+                <div class="card-header bg-dark text-light">
+                    <strong class="question-number">Question @questionNumber:</strong> <!-- Display question number -->
+                    <span class="question-text">@question.QuestionText</span>
+                    <span class="marks float-end"><strong>Mark:</strong> @question.QuestionMarks</span>
+                </div>
+                <div class="card-body bg-light">
+                    <div class="options">
+                        <p class="option @((question.CorrectOption == "A") ? "correct-option bg-success text-white" : "")">A. @question.OptionA</p>
+                        <p class="option @((question.CorrectOption == "B") ? "correct-option bg-success text-white" : "")">B. @question.OptionB</p>
+                        <p class="option @((question.CorrectOption == "C") ? "correct-option bg-success text-white" : "")">C. @question.OptionC</p>
+                        <p class="option @((question.CorrectOption == "D") ? "correct-option bg-success text-white" : "")">D. @question.OptionD</p>
+                    </div>
+                </div>
+            </div>
+            questionNumber++; // Increment question number for the next question
+        }
+    </div>
+}
+

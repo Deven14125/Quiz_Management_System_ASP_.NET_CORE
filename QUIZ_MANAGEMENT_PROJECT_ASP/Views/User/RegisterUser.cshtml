@@ -1,0 +1,114 @@
+﻿@model QUIZ_MANAGEMENT_PROJECT_ASP.Models.UserModel
+
+@{
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+    bool isEditMode = Model.UserID != 0; // Check if we are in edit mode    
+}
+
+<div class="container mt-4">
+    <div class="col-md-12">
+        <div class="card shadow-lg p-4 bg-success-subtle">
+            <h4 class="card-title text-center mb-4 text-black">User Details</h4>
+
+            <h1 class="text-center text-black">@TempData["PageTitle"]</h1>
+            <hr />
+            <form asp-controller="User" asp-action="SaveUser" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Hidden UserID Field -->
+                <input asp-for="UserID" type="hidden" />
+
+                <!-- Username Field -->
+                <div class="form-group mb-3 text-black">
+                    <label asp-for="UserName" class="control-label">UserName <span class="text-danger">*</span></label>
+                    <input asp-for="UserName" class="form-control" placeholder="Enter Username" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group mb-3 text-black">
+                    <label asp-for="Password" class="control-label">Password <span class="text-danger">*</span></label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group mb-3 text-black">
+                    <label asp-for="Email" class="control-label">Email <span class="text-danger">*</span></label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="Enter Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <!-- Mobile Field -->
+                <div class="form-group mb-3 text-black">
+                    <label asp-for="Mobile" class="control-label">Mobile <span class="text-danger">*</span></label>
+                    <input asp-for="Mobile" class="form-control" placeholder="Enter Mobile Number" />
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                </div>
+
+                <!-- IsActive Field (Show only in edit mode) -->
+                @if (isEditMode)
+                {
+                    <div class="form-group mb-3 text-black">
+                        <label asp-for="IsActive" class="control-label">IsActive <span class="text-danger">*</span></label>
+                        <input asp-for="IsActive" type="checkbox" class="form-check-input" />
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3 text-black">
+                        <label asp-for="IsAdmin" class="control-label">IsAdmin</label>
+                        <input asp-for="IsAdmin" type="checkbox" class="form-check-input" />
+                        <span asp-validation-for="IsAdmin" class="text-danger"></span>
+                    </div>
+                }
+
+                <!-- Hidden Created Field -->
+                <input asp-for="Created" type="hidden" />
+
+                <!-- Hidden Modified Field -->
+                <input asp-for="Modified" type="hidden" />
+
+                <!-- Submit Button -->
+                <div class="row">
+                    @* <div class="col-6">
+                        <a asp-action="Index" asp-controller="Home" class="btn bg-black text-light w-100 custom-btn-hover">Back to List</a>
+                    </div> *@
+                    @if (isEditMode)
+                    {
+                        <div class="col-12">
+                            <input type="submit" value="Save Changes" class="btn btn-success btn-block w-100 custom-btn-hover" />
+                        </div>
+                    }
+                    else{
+                        <div class="col-12">
+                            <input type="submit" value="Create Account" class="btn btn-success btn-block w-100 custom-btn-hover" />
+                        </div>
+                    }
+                   
+                </div>
+            </form>
+
+            <!-- Already a user? Login Link -->
+            <div class="form-group text-center mt-3">
+                <p class="text-black">
+                    Already a user?
+                    <a asp-controller="User" asp-action="LoginUser" class="text-success font-weight-bold custom-link-hover">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<!-- Custom CSS for Hover Effects -->
+<style>
+    .custom-link-hover:hover {
+        color: #e83e8c !important;
+        text-decoration: underline;
+    }
+</style>

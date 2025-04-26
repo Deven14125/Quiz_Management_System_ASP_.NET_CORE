@@ -1,0 +1,98 @@
+﻿@model QUIZ_MANAGEMENT_PROJECT_ASP.Models.QuestionLevelModel
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="QuestionLevel" asp-action="ViewQuestionLevelList">Question</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add Question Level</li>
+    </ol>
+</nav>
+
+<h1 class="text-light">@TempData["PageTitle"]</h1>
+
+<div class="container mt-4">
+    <!-- Breadcrumb -->
+    <div class="col-md-12">
+        <div class="card shadow-lg p-4 bg-info-subtle">
+
+            <h4 class="card-title text-center mb-4 text-black">Add Question Level</h4>
+            
+            <hr />
+            
+            <form asp-controller="QuestionLevel" asp-action="SaveQuestionLevel" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- QuestionLevelID Field -->
+                @if (Model.QuestionLevelID != 0)
+                {
+                    <!-- Display the QuestionLevelID field in edit mode (read-only or visible) -->
+                    <div class="col-12">
+                        <div class="form-group mb-3">
+                            <label asp-for="QuestionLevelID" class="form-label"></label>
+                            <input asp-for="QuestionLevelID" class="form-control" readonly />
+                            <span asp-validation-for="QuestionLevelID" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <!-- For adding a new record, use a hidden field to ensure the value is posted -->
+                    <input type="hidden" asp-for="QuestionLevelID" />
+                }
+
+                <!-- QuestionLevel Dropdown -->
+                @* <div class="col-12 text-black">
+                    <div class="form-group mb-3">
+                        <label asp-for="QuestionLevel" class="form-label"></label>
+                        <select asp-for="QuestionLevel" class="form-control">
+                            <option value="">Select Question Level</option>
+                            @foreach (var level in (List<SelectListItem>)ViewData["QuestionLevels"])
+                            {
+                                <option value="@level.Value">@level.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="QuestionLevel" class="text-danger"></span>
+                    </div>
+                </div> *@
+
+                <div class="col-12">
+                    <div class="form-group mb-3">
+                        <label asp-for="QuestionLevel" class="form-label">
+                            QuestionLevel <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="QuestionLevel" class="form-control" placeholder="Enter Question Level" />
+                        <span asp-validation-for="QuestionLevel" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @* <input type="hidden" asp-for="UserID" /> *@
+
+
+                <div class="col-12">
+                    <div class="form-group mb-3">
+                        <label asp-for="UserID">User <span class="text-danger">*</span></label>
+                        <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                            <option value="">Select User</option>
+                        </select>
+                        <span asp-validation-for="UserID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-controller="QuestionLevel" asp-action="ViewQuestionLevelList" class="btn btn-black bg-black text-light w-100">Back to List</a>
+                    </div>
+                    <div class="col-6">
+                        <input type="submit" value="@(Model.QuestionLevelID == 0 ? "Add" : "Update QuestionLevel")" class="btn btn-success btn-block w-100" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

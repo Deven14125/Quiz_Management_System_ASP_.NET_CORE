@@ -1,0 +1,156 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (TempData["SuccessLogin"] != null)
+{
+    <script>
+        Swal.fire({
+            title: '<span style="color:#fff;">Success!</span>',
+            text: '@TempData["SuccessLogin"]',
+            icon: 'success',
+            background: 'linear-gradient(135deg, #6e72fc, #ad1deb)',
+            color: '#fff',
+            iconColor: '#00ff7f',
+            confirmButtonText: 'Great!',
+            confirmButtonColor: '#ffd700',
+            showClass: {
+                popup: 'animate__animated animate__zoomIn animate__faster'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__zoomOut animate__faster'
+            },
+            padding: '2rem',
+            customClass: {
+                title: 'text-white fs-4',
+                htmlContainer: 'fs-6',
+                confirmButton: 'btn btn-light shadow-lg px-5 py-2 rounded-pill'
+            },
+            timer: 3000,
+            timerProgressBar: true
+        });
+    </script>
+}
+
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Home</li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section dashboard">
+    <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg">
+            <div class="row">
+
+                <!-- User Card -->
+                <div class="col-xxl-4 col-md-4">
+                    <a asp-controller="User" asp-action="UserList">
+                        <div class="card info-card sales-card shadow-lg" style="background: linear-gradient(135deg, #ff6b6b, #f06595); border-radius: 20px;">
+                            <div class="card-body text-white">
+                                <h5 class="card-title">User <span>| Today</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-white text-danger shadow" style="font-size: 2rem; width: 60px; height: 60px;">
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 class="text-white"> @ViewData["UserCount"]</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Quiz Card -->
+                <div class="col-xxl-4 col-md-4">
+                    <a asp-controller="Quiz" asp-action="QuizList">
+                        <div class="card info-card sales-card shadow-lg" style="background: linear-gradient(135deg, #00c9ff, #92fe9d); border-radius: 20px;">
+                            <div class="card-body text-white">
+                                <h5 class="card-title">Quiz <span>| Today</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-white text-info shadow" style="font-size: 2rem; width: 60px; height: 60px;">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 class="text-white">@ViewData["QuizCount"]</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Question Card -->
+                <div class="col-xxl-4 col-md-4">
+                    <a asp-controller="Question" asp-action="QuestionList">
+                        <div class="card info-card sales-card shadow-lg" style="background: linear-gradient(135deg, #fdc830, #f37335); border-radius: 20px;">
+                            <div class="card-body text-white">
+                                <h5 class="card-title">Question <span>| Today</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-white text-warning shadow" style="font-size: 2rem; width: 60px; height: 60px;">
+                                        <i class="bi bi-bag"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 class="text-white">@ViewData["QuestionCount"]</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Question Level Card -->
+                <div class="col-xxl-4 col-md-4">
+                    <a asp-controller="QuestionLevel" asp-action="ViewQuestionLevelList">
+                        <div class="card info-card sales-card shadow-lg" style="background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 20px;">
+                            <div class="card-body text-white">
+                                <h5 class="card-title">QuestionLevel <span>| Today</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-white text-primary shadow" style="font-size: 2rem; width: 60px; height: 60px;">
+                                        <i class="bi bi-window-stack"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 class="text-white">@ViewData["QuestionLevelCount"]</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- QuizWiseQuestion Card -->
+                <div class="col-xxl-4 col-md-4">
+                    <a asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionList">
+                        <div class="card info-card sales-card shadow-lg" style="background: linear-gradient(135deg, #12c2e9, #c471ed, #f64f59); border-radius: 20px;">
+                            <div class="card-body text-white">
+                                <h5 class="card-title">QuizWiseQuestion <span>| Today</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-white text-success shadow" style="font-size: 2rem; width: 60px; height: 60px;">
+                                        <i class="bi bi-receipt"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 class="text-white">@ViewData["QuizWiseQuestionCount"]</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+}

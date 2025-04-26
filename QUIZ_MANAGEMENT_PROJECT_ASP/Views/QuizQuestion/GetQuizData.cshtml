@@ -1,0 +1,18 @@
+﻿@* @model QUIZ_MANAGEMENT_PROJECT_ASP.Models.QuizQuestionModel;
+
+<h1 class="text-center bg-danger-subtle">@TempData["Title"]</h1>
+
+
+<form asp-controller="QuizQuestion" asp-action="GetQuizData">
+    <div class="form-group">
+        <label class="text-light" for="QuizName">Select Quiz</label>
+        <div style="display: flex; align-items: center;">
+            <select id="QuizName" name="QuizName" asp-for="QuizID" asp-items="@(new SelectList(ViewBag.QuizQuestionList,"QuizID","QuizName"))" class="form-control" style="margin-right: 10px;">
+                <option value="">-- Select a Quiz --</option>
+            </select>
+
+            <button type="submit" class="btn btn-success">Show</button>
+        </div>
+    </div>
+</form>
+ *@
